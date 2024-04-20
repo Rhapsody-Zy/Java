@@ -1,6 +1,7 @@
 package com.bilibili.pt06.studentsystem;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class App {
@@ -22,6 +23,7 @@ public class App {
                     System.out.println("退出");
                     break loop;
                 }
+                case "5" -> showUser(list);
                 default -> System.out.println("输入选项无效，请重新输入");
             }
         }
@@ -29,15 +31,77 @@ public class App {
 
     }
 
-    //登录
-    private static void login(ArrayList<User> list) {
+
+    //测试用 - 遍历list中的用户
+    private static void showUser(ArrayList<User> list) {
+        for (int i = 0; i < list.size(); i++) {
+            User user = list.get(i);
+            System.out.println(user.getUsername() + ", " + user.getPassword() + ", " + user.getPersonID() + ", " + user.getPhoneNumber());
+        }
+
+
     }
 
-    //注册功能方法
-    private static void register(ArrayList<User> list) {
-        User user = new User();
+    //一、登录
+    private static void login(ArrayList<User> list) {
         Scanner sc = new Scanner(System.in);
+        int index = 0;
+        //1.录入用户名
+        while (true) {
+            System.out.println("请输入用户名");
+            String username = sc.next();
+            boolean flag = contains(list,username);
+            if (!flag) {
+                System.out.println("用户名未注册，请先注册");
+                continue;
+            }else {
+                //获取用户名在list中的下标
+                index = getIndex(list,username);
+                break;
+            }
+        }
 
+        //4.判断密码是否正确
+        String password1 = list.get(index).getPassword();
+        for (int i = 0; i < 3; i++) {
+            //2.录入密码
+            System.out.println("请输入密码");
+            String password = sc.next();
+
+            //3.录入验证码
+            while (true) {
+                //生成验证码
+                String yzm = getCode();
+                System.out.println("请输入验证码 " + yzm);
+                String yzm1 = sc.next();
+                if (!yzm.equals(yzm1)) {
+                    System.out.println("验证码错误，请重新输入");
+                    continue;
+                }else {
+                    break;
+                }
+            }
+            if (password1.equals(password)) {
+                System.out.println("登录成功");
+                break;
+            }else {
+                if (i==2) {
+                    System.out.println("当前账号已暂时锁定，请点击忘记密码");
+                }else {
+                    System.out.println("密码错误，您好有" + (2-i) +"次机会");
+                }
+            }
+        }
+
+    }
+
+    //二、注册功能方法
+    private static void register(ArrayList<User> list) {
+
+        //新建user对象
+        User user = new User();
+
+        Scanner sc = new Scanner(System.in);
         //1.键盘录入用户名
         while (true) {
             //输入用户名
@@ -58,6 +122,7 @@ public class App {
                 System.out.println("用户名重复，请重新输入");
                 continue;
             }else {
+                user.setUsername(username);
                 break;
             }
         }
@@ -73,6 +138,7 @@ public class App {
                 System.out.println("两次密码不一致，请重新输入");
                 continue;
             }else {
+                user.setPassword(password);
                 break;
             }
         }
@@ -81,19 +147,75 @@ public class App {
         while (true) {
             System.out.println("请输入身份证号码");
             String personID = sc.next();
-
+            boolean flag3 = checkPersonID(personID);
+            if (!flag3) {
+                System.out.println("身份证号码不合法，请重新输入");
+                continue;
+            }else {
+                user.setPersonID(personID);
+                break;
+            }
 
         }
 
+        //4.键盘录入手机号
+        while (true) {
+            System.out.println("请输入手机号");
+            String phoneNumber = sc.next();
+            checkPhoneNUmber(phoneNumber);
+            boolean flag4 = checkPhoneNUmber(phoneNumber);
+            if (!flag4) {
+                System.out.println("请输入正确的手机号");
+                continue;
+            }else {
+                user.setPhoneNumber(phoneNumber);
+                break;
+            }
+        }
 
-
+        //将user对象添加到list中
+        list.add(user);
+        System.out.println("注册成功");
 
     }
 
 
-
-    //忘记密码
+    //三、忘记密码
     private static void forgetPassword(ArrayList<User> list) {
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            //1.录入用户名
+            System.out.println("请输入用户名");
+            String username = sc.next();
+            boolean flag = contains(list, username);
+            if (!flag) {
+                System.out.println("用户名未注册");
+                break;
+            }
+
+            //获取这个用户名在list中的索引
+            int index = getIndex(list,username);
+
+            //2.录入身份证号和手机号进行判断
+            System.out.println("请输入身份证号");
+            String personID = sc.next();
+            System.out.println("请输入手机号");
+            String phoneNumber = sc.next();
+
+            boolean flag2 = checkPersonID(list,personID,phoneNumber,index);
+            if (!flag2) {
+                System.out.println("账号信息不匹配，修改失败");
+                continue;
+            }
+
+            //3.录入新的密码
+            System.out.println("请输入新的密码");
+            String new_password = sc.next();
+            User user = list.get(index);
+            user.setPassword(new_password);
+            break;
+        }
     }
 
 
@@ -125,21 +247,21 @@ public class App {
         return count > 0;
     }
 
-    //判断id的唯一性
-    public static boolean contains(ArrayList<User> list,String id){
-        if (getIndex(list,id) >= 0) {
+    //判断用户名的唯一性
+    public static boolean contains(ArrayList<User> list,String username){
+        if (getIndex(list,username) >= 0) {
             return true;
         }else {
             return false;
         }
     }
 
-    //通过id返回索引的方法
-    public static int getIndex(ArrayList<User> list,String id) {
+    //通过用户名返回索引的方法
+    public static int getIndex(ArrayList<User> list,String username) {
         for (int i = 0; i < list.size(); i++) {
             User s = list.get(i);
-            String sid = s.getUsername();
-            if (sid.equals(id)) {
+            String username1 = s.getUsername();
+            if (username1.equals(username)) {
                 return i;
             }
         }
@@ -165,6 +287,75 @@ public class App {
                 return false;
             }
         }
+
+        char c3 = personID.charAt(17);
+        if (!((c3 >= '0' && c3 <= '9') || (c3 == 'x') || (c3 == 'X'))) {
+            return false;
+        }
+        return true;
     }
 
+    //检查手机号格式
+    private static boolean checkPhoneNUmber(String phoneNumber) {
+        int len = phoneNumber.length();
+        if (len != 11) {
+            return false;
+        }
+
+        char c = phoneNumber.charAt(0);
+        if (c == '0') {
+            return false;
+        }
+
+        for (int i = 1; i < phoneNumber.length(); i++) {
+            char c1 = phoneNumber.charAt(i);
+            if (!(c1 >= '0' && c1 <= '9')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //生成验证码
+    //要求：长度为5
+    // 由4位大写或者小写字母和1位数字组成，同一个字母可重复
+    //数字可以出现在任意位置
+    private static String getCode(){
+        Random r = new Random();
+        String yzm = "";
+        for (int i = 0; i < 4; i++) {
+            int a = r.nextInt(2);
+            switch (a) {
+                case 0 -> {
+                    char c = (char)(r.nextInt(26)+65);
+                    yzm = yzm +c;
+                    break;
+                }
+                case 1 -> {
+                    char c = (char)(r.nextInt(26)+97);
+                    yzm = yzm +c;
+                    break;
+                }
+            }
+        }
+        String temp = Integer.toString(r.nextInt(10));
+        char c = temp.charAt(0);
+        int index = r.nextInt(4);
+        String start = yzm.substring(0,index);
+        String end = yzm.substring(index);
+        return start + c + end;
+//        char temp = arr[index];
+//        arr[index] = arr[arr.lenght - 1];
+//        arr[arr.lenght - 1] = temp;
+    }
+
+    //检查手机号和身份证号是否一致
+    public static boolean checkPersonID(ArrayList<User> list,String personID,String phoneNumber,int index) {
+        String s_personID = list.get(index).getPersonID();
+        String s_phoneNumber = list.get(index).getPhoneNumber();
+        if (s_personID.equals(personID) && s_phoneNumber.equals(phoneNumber)) {
+            return true;
+        }
+        return false;
+    }
 }
