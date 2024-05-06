@@ -12,8 +12,8 @@ public class LoginJFrame extends JFrame implements MouseListener {
     //创建一个集合存储正确的用户名和密码
     static ArrayList<User> allUsers = new ArrayList<>();
     static {
-        allUsers.add(new User("zhangsan","123"));
-        allUsers.add(new User("lisi","1234"));
+        allUsers.add(new User("zhouyi","0305"));
+        allUsers.add(new User("周艺","0305"));
     }
 
 
@@ -162,21 +162,56 @@ public class LoginJFrame extends JFrame implements MouseListener {
                 showJDialog("验证码错误");
                 System.out.println("验证码错误");
             } else if (contains(userInput)) {
-                System.out.println("密码正确，zhi'xi");
+                System.out.println("密码正确，执行游戏操作");
+                //关闭登录界面
+                this.setVisible(false);
+                //打开游戏界面
+                new GameJFrame();
+            }else {
+                System.out.println("密码或验证码错误");
+                showJDialog("账号或密码错误，请重新输入");
+                username.setText("");
+                password.setText("");
+                this.getContentPane().repaint();
+
             }
+        } else if (source == register) {
+            System.out.println("打开注册界面");
+            //this.setVisible(false);
+            //new RegisterJFrame();
 
-
+        } else if (source == rightCode) {
+            System.out.println("重置验证码");
+            String code = CodeUtil.getCode();
+            rightCode.setText(code);
+            this.getContentPane().repaint();
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         //鼠标按着不松
+        Object source = e.getSource();
+        if (source == login) {
+            System.out.println("鼠标按着不松");
+            login.setIcon(new ImageIcon("puzzlegame1.0\\image\\login\\登录按下.png"));
+        } else if (source == register) {
+            System.out.println("鼠标按着不松");
+            register.setIcon(new ImageIcon("puzzlegame1.0\\image\\register\\注册按下.png"));
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         //鼠标松开
+        Object source = e.getSource();
+        if (source == login) {
+            System.out.println("鼠标松开");
+            login.setIcon(new ImageIcon("puzzlegame1.0\\image\\login\\登录按钮.png"));
+        } else if (source == register) {
+            System.out.println("鼠标松开");
+            register.setIcon(new ImageIcon("puzzlegame1.0\\image\\register\\注册按钮.png"));
+        }
     }
 
     @Override
