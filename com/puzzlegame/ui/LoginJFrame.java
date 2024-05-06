@@ -1,17 +1,29 @@
 package com.bilibili.ui;
 
 import com.bilibili.Util.CodeUtil;
+import com.bilibili.domain.User;
 
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class LoginJFrame extends JFrame {
+public class LoginJFrame extends JFrame implements MouseListener {
     //创建一个集合存储正确的用户名和密码
-    static ArrayList<User> list = new ArrayList<>();
+    static ArrayList<User> allUsers = new ArrayList<>();
     static {
-        list.add(new User("zhangsan","123"));
-        list.add(new User("lisi","1234"));
+        allUsers.add(new User("zhangsan","123"));
+        allUsers.add(new User("lisi","1234"));
     }
+
+
+    JButton login = new JButton();
+    JButton register = new JButton();
+    JLabel rightCode = new JLabel();
+
+    JTextField username = new JTextField();
+    JTextField password = new JTextField();
+    JTextField code = new JTextField();
 
 
     public LoginJFrame() {
@@ -27,37 +39,34 @@ public class LoginJFrame extends JFrame {
 
     public void initView() {
         //1. 添加用户名文字
-        JLabel usernameText = new JLabel(new ImageIcon("puzzlegame\\image\\login\\用户名.png"));
+        JLabel usernameText = new JLabel(new ImageIcon("puzzlegame1.0\\image\\login\\用户名.png"));
         usernameText.setBounds(116, 135, 47, 17);
         this.getContentPane().add(usernameText);
 
         //2.添加用户名输入框
-        JTextField username = new JTextField();
         username.setBounds(195, 134, 200, 30);
         this.getContentPane().add(username);
 
         //3.添加密码文字
-        JLabel passwordText = new JLabel(new ImageIcon("puzzlegame\\image\\login\\密码.png"));
+        JLabel passwordText = new JLabel(new ImageIcon("puzzlegame1.0\\image\\login\\密码.png"));
         passwordText.setBounds(130, 195, 32, 16);
         this.getContentPane().add(passwordText);
 
         //4.密码输入框
-        JTextField password = new JTextField();
         password.setBounds(195, 195, 200, 30);
         this.getContentPane().add(password);
 
         //验证码提示
-        JLabel codeText = new JLabel(new ImageIcon("puzzlegame\\image\\login\\验证码.png"));
+        JLabel codeText = new JLabel(new ImageIcon("puzzlegame1.0\\image\\login\\验证码.png"));
         codeText.setBounds(133, 256, 50, 30);
         this.getContentPane().add(codeText);
 
         //验证码的输入框
-        JTextField code = new JTextField();
         code.setBounds(195, 256, 100, 30);
         this.getContentPane().add(code);
 
         String codeStr = CodeUtil.getCode();
-        JLabel rightCode = new JLabel();
+
         //设置内容
         rightCode.setText(codeStr);
         //位置和宽高
@@ -66,9 +75,8 @@ public class LoginJFrame extends JFrame {
         this.getContentPane().add(rightCode);
 
         //5.添加登录按钮
-        JButton login = new JButton();
         login.setBounds(123, 310, 128, 47);
-        login.setIcon(new ImageIcon("puzzlegame\\image\\login\\登录按钮.png"));
+        login.setIcon(new ImageIcon("puzzlegame1.0\\image\\login\\登录按钮.png"));
         //去除按钮的默认边框
         login.setBorderPainted(false);
         //去除按钮的默认背景
@@ -76,9 +84,8 @@ public class LoginJFrame extends JFrame {
         this.getContentPane().add(login);
 
         //6.添加注册按钮
-        JButton register = new JButton();
         register.setBounds(256, 310, 128, 47);
-        register.setIcon(new ImageIcon("puzzlegame\\image\\login\\注册按钮.png"));
+        register.setIcon(new ImageIcon("puzzlegame1.0\\image\\login\\注册按钮.png"));
         //去除按钮的默认边框
         register.setBorderPainted(false);
         //去除按钮的默认背景
@@ -86,9 +93,14 @@ public class LoginJFrame extends JFrame {
         this.getContentPane().add(register);
 
         //7.添加背景图片
-        JLabel background = new JLabel(new ImageIcon("puzzlegame\\image\\login\\background.png"));
+        JLabel background = new JLabel(new ImageIcon("puzzlegame1.0\\image\\login\\background.png"));
         background.setBounds(0, 0, 470, 390);
         this.getContentPane().add(background);
+
+        login.addMouseListener(this);
+        register.addMouseListener(this);
+        rightCode.addMouseListener(this);
+
     }
 
 
@@ -122,5 +134,69 @@ public class LoginJFrame extends JFrame {
 
         //让弹框展示出来
         jDialog.setVisible(true);
+    }
+
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        //鼠标单击
+        Object source = e.getSource();
+        System.out.println("点击登录");
+        if (source == login) {
+            //获取输入框输入的账号密码和验证码
+            String usernameInput = username.getText();
+            String passwordInput = password.getText();
+            String codeInput = code.getText();
+
+            //创建一个学生对象，存储键盘的录入结果
+            User userInput = new User(usernameInput,passwordInput);
+
+            //首先判断填写内容是否有空缺
+            if (codeInput.isEmpty()) {
+                showJDialog("验证码不能为空");
+                System.out.println("验证码不能为空");
+            } else if ((usernameInput.isEmpty()) || (passwordInput.isEmpty())) {
+                showJDialog("账号密码不能为空");
+                System.out.println("账号密码不能为空");
+            }else if (!codeInput.equalsIgnoreCase(rightCode.getText())) {
+                showJDialog("验证码错误");
+                System.out.println("验证码错误");
+            } else if (contains(userInput)) {
+                System.out.println("密码正确，zhi'xi");
+            }
+
+
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        //鼠标按着不松
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //鼠标松开
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //鼠标划入
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        //鼠标划出
+    }
+
+    public boolean contains(User userInput) {
+        for (int i = 0; i < allUsers.size(); i++) {
+            User rightUser = allUsers.get(i);
+            if (userInput.getName().equals(rightUser.getName()) && userInput.getPassword().equals(rightUser.getPassword())) {
+                //账号密码正确，返回true
+                return true;
+            }
+        }
+        return false;
     }
 }
