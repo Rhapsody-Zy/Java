@@ -1,4 +1,4 @@
-package com.yeu.pt09.test03;
+package com.bilibili.pt09.test03;
 
 public class LambdaDemo1 {
     public static void main(String[] args) {
@@ -8,6 +8,19 @@ public class LambdaDemo1 {
             3.函数式接口：
                 有且仅有一个抽象方法的接口叫做函数式接口，接口上方可以加@FunctionalInterface注解
         */
+        /*method(new Swim() {
+            @Override
+            public void swimming() {
+                System.out.println("正在游泳~~~");
+            }
+        });*/
+
+        //2.使用Lambda进行改写
+        method(
+                ()->{
+                    System.out.println("正在游泳~~~");
+                }
+        );
 
     }
 

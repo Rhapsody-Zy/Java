@@ -1,4 +1,4 @@
-package com.yeu.pt07.test15.demo3;
+package com.bilibili.pt07.test15.demo3;
 
 public class InterImpl implements Inter{
     @Override
