@@ -29,7 +29,7 @@ public class LambdaDemo1 {
     }
 }
 
-
+@FunctionalInterface
 interface Swim{
     public abstract void swimming();
 }
