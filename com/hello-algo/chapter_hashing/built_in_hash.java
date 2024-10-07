@@ -2,7 +2,8 @@
  * File: built_in_hash.java
  * Created Time: 2023-06-21
  * Author: krahets (krahets@163.com)
- */
+ *//*
+
 
 package chapter_hashing;
 
@@ -31,8 +32,11 @@ public class built_in_hash {
         int hashTup = Arrays.hashCode(arr);
         System.out.println("数组 " + Arrays.toString(arr) + " 的哈希值为 " + hashTup);
 
-        /*ListNode obj = new ListNode(0);
+        */
+/*ListNode obj = new ListNode(0);
         int hashObj = obj.hashCode();
-        System.out.println("节点对象 " + obj + " 的哈希值为 " + hashObj);*/
+        System.out.println("节点对象 " + obj + " 的哈希值为 " + hashObj);*//*
+
     }
 }
+*/
