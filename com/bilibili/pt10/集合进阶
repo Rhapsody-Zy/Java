@@ -1,0 +1,12 @@
+Collection集合包含
+    List系列集合：添加的元素是有序的、可重复、有索引
+    Set系列集合：添加的元素无序的、不可重复、无索引
+
+    List包含
+        ArrayList
+        LinkedList
+        Vector
+    Set包含
+        HashSet --> LinkedHashSet
+        TreeSet
+
