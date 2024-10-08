@@ -5,7 +5,7 @@ import java.util.ArrayList;
 //添加数字
 public class Test1 {
     public static void main(String[] args) {
-        //ArrayList<Integer> list = new ArrayList<>();
+        //ArrayList底层代码分析<Integer> list = new ArrayList底层代码分析<>();
 
         ArrayList<Character> list = new ArrayList<>();
 

@@ -13,7 +13,7 @@ public class A03_CollectionDemo3 {
         //迭代器遍历完后，指针不会复位
         //循环中只能使用一次next()方法
         //迭代器遍历时，不能使用集合的方法进行增加或删除
-        //   必要删除的话，需要使用迭代器的remove方法 增加无方法
+        //   必要删除的话，需要使用迭代器的remove方法
 
 
         Collection<String> coll = new ArrayList<>();

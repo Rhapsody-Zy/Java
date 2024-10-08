@@ -6,7 +6,7 @@ public class ArrayListDemo1 {
     public static void main(String[] args) {
         //1.创建集合的对象
         //泛型：限定集合中存储数据的类型
-        //ArrayList<String> list = new ArrayList<String>();
+        //ArrayList底层代码分析<String> list = new ArrayList底层代码分析<String>();
         //JDK7:
 
         ArrayList<String> list = new ArrayList<>();
