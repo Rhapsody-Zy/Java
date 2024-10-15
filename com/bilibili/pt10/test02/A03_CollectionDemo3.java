@@ -14,7 +14,10 @@ public class A03_CollectionDemo3 {
         //循环中只能使用一次next()方法
         //迭代器遍历时，不能使用集合的方法进行增加或删除
         //   必要删除的话，需要使用迭代器的remove方法
-
+        /*
+        迭代器在Java中的类是Iterator，迭代器是 集合专用 的遍历方式
+        boolean hasNext() 判断当前位置是否有元素
+        E next() 获取当前位置的元素，并将迭代器对象移向下一位置*/
 
         Collection<String> coll = new ArrayList<>();
 
