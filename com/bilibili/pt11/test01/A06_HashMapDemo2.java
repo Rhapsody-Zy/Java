@@ -44,5 +44,23 @@ public class A06_HashMapDemo2 {
             Integer value = entry.getValue();
             System.out.println(key + " : " + value);
         }
+
+        //求最大值
+        int max = 0;
+        for (Map.Entry<String, Integer> entry : entries) {
+            int count = entry.getValue();
+            if (count > max) {
+                max = count;
+            }
+        }
+
+        System.out.println(max);
+
+        for (Map.Entry<String, Integer> entry : entries) {
+            int count = entry.getValue();
+            if (count == max) {
+                System.out.println("投票最多的景点是：" + entry.getKey());
+            }
+        }
     }
 }
