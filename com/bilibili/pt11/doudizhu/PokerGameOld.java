@@ -1,12 +1,12 @@
 package com.bilibili.pt11.doudizhu;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
-public class PokerGame {
+public class PokerGameOld {
 
     //牌盒
-    static HashMap<Integer,String> hm = new HashMap<>();
-    static ArrayList<Integer> list = new ArrayList<>();
+    static ArrayList<String> list = new ArrayList<>();
 
     //静态代码块
     //特点：随着类的加载而加载，且只执行一次
@@ -17,44 +17,39 @@ public class PokerGame {
         String[] color = {"♦","♣","♠","♥"};
         String[] number = {"3","4","5","6","7","8","9","10","J","Q","K","A","2"};
 
-        int index = 1;
-        for (String n : number) {
-            for (String c : color) {
-                hm.put(index,c + n);
-                list.add(index);
-                index++;
+        for (String c : color) {
+            for (String n : number) {
+                list.add(c + n);
             }
         }
-        hm.put(index,"小王");
-        list.add(index++);
-        hm.put(index,"大王");
-        list.add(index);
-
-    }
+        list.add("大王");
+        list.add("小王");
+    };
 
 
-    public PokerGame(){
+    public PokerGameOld(){
         //洗牌
         Collections.shuffle(list);
-        //发牌 使用TreeSet进行自动排序
-        TreeSet<Integer> lord = new TreeSet<>();
-        TreeSet<Integer> player1 = new TreeSet<>();
-        TreeSet<Integer> player2 = new TreeSet<>();
-        TreeSet<Integer> player3 = new TreeSet<>();
+        //发牌
+        ArrayList<String> lord = new ArrayList<>();
+        ArrayList<String> player1 = new ArrayList<>();
+        ArrayList<String> player2 = new ArrayList<>();
+        ArrayList<String> player3 = new ArrayList<>();
 
         //遍历牌库
         for (int i = 0; i < list.size(); i++) {
-            Integer poker = list.get(i);
+            String s = list.get(i);
             if (i < 3) {
-                lord.add(poker);
+                lord.add(s);
                 continue;
             }
+
             if (i % 3 == 0) {
-                player1.add(poker);
+                player1.add(s);
             }else if (i % 3 == 1) {
-                player2.add(poker);
+                player2.add(s);
             }else {
-                player3.add(poker);
+                player3.add(s);
             }
         }
 
@@ -68,14 +63,12 @@ public class PokerGame {
 
     //name - 玩家的名字
     //list - 玩家的手牌
-    public void lookPoker(String name, TreeSet<Integer> list) {
+    public void lookPoker(String name, ArrayList<String> list) {
         System.out.print(name + " : ");
-        for (Integer i : list) {
-            String poker = hm.get(i);
+        for (String poker : list) {
             System.out.print(poker + " ");
         }
         System.out.println();
     }
+
 }
-
-
