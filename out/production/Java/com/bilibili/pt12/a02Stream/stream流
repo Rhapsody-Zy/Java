@@ -1,0 +1,14 @@
+1.Stream流的作用
+    结合了Lambda表达式，简化集合、数组的操作
+2.Stream的使用步骤
+    获取Stream流对象
+    使用中间方法处理数据
+    使用终结方法处理数据
+3.如何获取Stream流对象
+    单列集合：Collection中的默认方法stream
+    双列集合：不能直接获取
+    数组：Arrays工具类型中的静态方法stream
+    一堆零散的数据：Stream接口中的静态方法of
+4.常见方法
+    中间方法：filter, limit, skip, distinct, concat, map
+    终结方法：forEach, count, collect
