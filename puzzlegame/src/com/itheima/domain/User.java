@@ -4,7 +4,6 @@ public class User {
     private String username;
     private String password;
 
-
     public User() {
     }
 
@@ -45,5 +44,8 @@ public class User {
         this.password = password;
     }
 
+    public String toString() {
+        return "User{username = " + username + ", password = " + password + "}";
+    }
 
 }

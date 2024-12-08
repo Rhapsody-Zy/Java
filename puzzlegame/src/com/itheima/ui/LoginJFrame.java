@@ -1,5 +1,6 @@
 package com.itheima.ui;
 
+import cn.hutool.core.io.FileUtil;
 import com.itheima.domain.User;
 import com.itheima.util.CodeUtil;
 
@@ -7,6 +8,7 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LoginJFrame extends JFrame implements MouseListener {
 
@@ -25,7 +27,7 @@ public class LoginJFrame extends JFrame implements MouseListener {
 
     public LoginJFrame() {
         //读取本地文件中的用户信息
-        readUserInfo()
+        readUserInfo();
 
         //初始化界面
         initJFrame();
@@ -40,8 +42,16 @@ public class LoginJFrame extends JFrame implements MouseListener {
 
     //读取本地文件中的用户信息
     private void readUserInfo() {
-
-
+        List<String> userInfoStrList = FileUtil.readUtf8Lines("W:\\Java\\puzzlegame\\userinfo.txt");
+        for (String s : userInfoStrList) {
+            String[] userInfoArr = s.split("&");
+            String[] arr1 = userInfoArr[0].split("=");
+            String[] arr2 = userInfoArr[1].split("=");
+            User u = new User(arr1[1],arr2[1]);
+            System.out.println(u);
+            allUsers.add(u);
+        }
+        System.out.println(allUsers);
 
     }
 
