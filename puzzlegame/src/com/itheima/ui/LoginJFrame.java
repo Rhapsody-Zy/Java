@@ -10,11 +10,7 @@ import java.util.ArrayList;
 
 public class LoginJFrame extends JFrame implements MouseListener {
 
-    static ArrayList<User> allUsers = new ArrayList<>();
-    static {
-        allUsers.add(new User("zhangsan","123"));
-        allUsers.add(new User("lisi","1234"));
-    }
+    ArrayList<User> allUsers = new ArrayList<>();
 
     JButton login = new JButton();
     JButton register = new JButton();
@@ -28,6 +24,9 @@ public class LoginJFrame extends JFrame implements MouseListener {
     JLabel rightCode = new JLabel();
 
     public LoginJFrame() {
+        //读取本地文件中的用户信息
+        readUserInfo()
+
         //初始化界面
         initJFrame();
 
@@ -36,6 +35,14 @@ public class LoginJFrame extends JFrame implements MouseListener {
 
         //让当前界面显示出来
         this.setVisible(true);
+    }
+
+
+    //读取本地文件中的用户信息
+    private void readUserInfo() {
+
+
+
     }
 
     public void initView() {
