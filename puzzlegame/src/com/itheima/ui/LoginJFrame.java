@@ -48,10 +48,8 @@ public class LoginJFrame extends JFrame implements MouseListener {
             String[] arr1 = userInfoArr[0].split("=");
             String[] arr2 = userInfoArr[1].split("=");
             User u = new User(arr1[1],arr2[1]);
-            System.out.println(u);
             allUsers.add(u);
         }
-        System.out.println(allUsers);
 
     }
 
@@ -177,6 +175,10 @@ public class LoginJFrame extends JFrame implements MouseListener {
             }
         } else if (e.getSource() == register) {
             System.out.println("点击了注册按钮");
+            //关闭当前的登录界面
+            this.setVisible(false);
+            //打开注册的界面
+            new RegisterJFrame(allUsers);
         } else if (e.getSource() == rightCode) {
             System.out.println("更换验证码");
             //获取一个新的验证码
