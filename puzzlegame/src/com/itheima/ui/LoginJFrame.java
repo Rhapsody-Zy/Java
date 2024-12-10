@@ -254,6 +254,4 @@ public class LoginJFrame extends JFrame implements MouseListener {
         //循环结束之后还没有找到就表示不存在
         return false;
     }
-
-
 }
