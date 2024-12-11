@@ -1,11 +1,16 @@
 package com.itheima.ui;
 
+import com.itheima.domain.GameInfo;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Random;
 
 public class GameJFrame extends JFrame implements KeyListener, ActionListener {
@@ -46,6 +51,21 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
     JMenuItem reLoginItem = new JMenuItem("重新登录");
     JMenuItem closeItem = new JMenuItem("关闭游戏");
 
+    JMenu saveJMenu = new JMenu("存档");
+    JMenu loadJMenu = new JMenu("读档");
+
+    JMenuItem saveItem0 = new JMenuItem("存档0(空)");
+    JMenuItem saveItem1 = new JMenuItem("存档1(空)");
+    JMenuItem saveItem2 = new JMenuItem("存档2(空)");
+    JMenuItem saveItem3 = new JMenuItem("存档3(空)");
+    JMenuItem saveItem4 = new JMenuItem("存档4(空)");
+
+    JMenuItem loadItem0 = new JMenuItem("读档0(空)");
+    JMenuItem loadItem1 = new JMenuItem("读档1(空)");
+    JMenuItem loadItem2 = new JMenuItem("读档2(空)");
+    JMenuItem loadItem3 = new JMenuItem("读档3(空)");
+    JMenuItem loadItem4 = new JMenuItem("读档4(空)");
+
     JMenuItem accountItem = new JMenuItem("公众号");
 
 
@@ -59,7 +79,6 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
 
         //初始化菜单
         initJMenuBar();
-
 
         //初始化数据（打乱）
         initData();
@@ -179,16 +198,34 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
         JMenu aboutJMenu = new JMenu("关于我们");
         JMenu changeImage = new JMenu("更换图片");
 
+
+        //把5个存档，添加到saveJMenu中
+        saveJMenu.add(saveItem0);
+        saveJMenu.add(saveItem1);
+        saveJMenu.add(saveItem2);
+        saveJMenu.add(saveItem3);
+        saveJMenu.add(saveItem4);
+
+        //把5个读档，添加到loadJMenu中
+        loadJMenu.add(loadItem0);
+        loadJMenu.add(loadItem1);
+        loadJMenu.add(loadItem2);
+        loadJMenu.add(loadItem3);
+        loadJMenu.add(loadItem4);
+
+
         //把美女，动物，运动添加到更换图片当中
         changeImage.add(girl);
         changeImage.add(animal);
         changeImage.add(sport);
 
-        //将更换图片，重新游戏，重新登录，关闭游戏添加到“功能”选项当中
+        //将更换图片，重新游戏，重新登录，关闭游戏，存档，读档添加到“功能”选项当中
         functionJMenu.add(changeImage);
         functionJMenu.add(replayItem);
         functionJMenu.add(reLoginItem);
         functionJMenu.add(closeItem);
+        functionJMenu.add(saveJMenu);
+        functionJMenu.add(loadJMenu);
 
         //将公众号添加到关于我们当中
         aboutJMenu.add(accountItem);
@@ -201,6 +238,16 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
         reLoginItem.addActionListener(this);
         closeItem.addActionListener(this);
         accountItem.addActionListener(this);
+        saveItem0.addActionListener(this);
+        saveItem1.addActionListener(this);
+        saveItem2.addActionListener(this);
+        saveItem3.addActionListener(this);
+        saveItem4.addActionListener(this);
+        loadItem0.addActionListener(this);
+        loadItem1.addActionListener(this);
+        loadItem2.addActionListener(this);
+        loadItem3.addActionListener(this);
+        loadItem4.addActionListener(this);
 
         //将菜单里面的两个选项添加到菜单当中
         jMenuBar.add(functionJMenu);
@@ -284,7 +331,6 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
             step++;
             //调用方法按照最新的数字加载图片
             initImage();
-
         } else if (code == 38) {
             System.out.println("向上移动");
             if (x == 3) {
@@ -387,7 +433,6 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
             System.exit(0);
         } else if (obj == accountItem) {
             System.out.println("公众号");
-
             //创建一个弹框对象
             JDialog jDialog = new JDialog();
             //创建一个管理图片的容器对象JLabel
@@ -439,7 +484,24 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
             initData();
             //重新加载图片
             initImage();
+        }else if(obj == saveItem0 || obj == saveItem1 || obj == saveItem2 || obj == saveItem3 ||obj == saveItem4){
+            JMenuItem item = (JMenuItem) obj;
+            String str = item.getText();
+            int index = str.charAt(2) - '0';
+            try {
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("puzzlegame\\lib\\save" + index + ".data"));
+                GameInfo gi = new GameInfo(data,x,y,path,step);
+                oos.writeObject(gi);
+                oos.close();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+        }else if(obj == loadItem0 || obj == loadItem1 || obj == loadItem2 || obj == loadItem3 ||obj == loadItem4){
+            JMenuItem item = (JMenuItem) obj;
+            System.out.println(item.getText());
+
         }
     }
-
 }
