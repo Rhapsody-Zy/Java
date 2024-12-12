@@ -8,9 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.util.Properties;
 import java.util.Random;
 
 public class GameJFrame extends JFrame implements KeyListener, ActionListener {
@@ -253,6 +252,8 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
         jMenuBar.add(functionJMenu);
         jMenuBar.add(aboutJMenu);
 
+        //获取存档信息，修改菜单上表示的内容
+        getGameInfo();
 
         //给整个界面设置菜单
         this.setJMenuBar(jMenuBar);
@@ -273,6 +274,39 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
         this.setLayout(null);
         //给整个界面添加键盘监听事件
         this.addKeyListener(this);
+
+    }
+
+    public void getGameInfo() {
+        //创建File对象表示所有存档所在的文件夹
+        File file = new File("puzzlegame\\lib\\save");
+        //进入文件夹获取所有文件信息
+        File[] files = file.listFiles();
+        if (files == null) {
+            return;
+        }
+        for (File f : files) {
+            //遍历文件获取文件中的步数
+            GameInfo gi = null;
+            try {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+                gi = (GameInfo) ois.readObject();
+                ois.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            int step = gi.getStep();
+            //将存档的步数同步到菜单中
+            //获取文件名
+            String name = f.getName();
+            int index = name.charAt(4) - '0';
+            saveJMenu.getItem(index).setText("存档" + index + "(" + step + "步)");
+            loadJMenu.getItem(index).setText("存档" + index + "(" + step + "步)");
+
+
+        }
 
     }
 
@@ -436,7 +470,18 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
             //创建一个弹框对象
             JDialog jDialog = new JDialog();
             //创建一个管理图片的容器对象JLabel
-            JLabel jLabel = new JLabel(new ImageIcon("puzzlegame\\image\\about.png"));
+
+            //从配置文件中读取到about图片地址
+            Properties prop = new Properties();
+            try {
+                FileInputStream fis = new FileInputStream("puzzlegame\\game.properties");
+                prop.load(fis);
+                fis.close();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            String path = (String) prop.get("account");
+            JLabel jLabel = new JLabel(new ImageIcon(path));
             //设置位置和宽高
             jLabel.setBounds(0, 0, 258, 258);
             //把图片添加到弹框当中
@@ -489,7 +534,7 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
             String str = item.getText();
             int index = str.charAt(2) - '0';
             try {
-                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("puzzlegame\\lib\\save" + index + ".data"));
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("puzzlegame\\lib\\save\\save" + index + ".data"));
                 GameInfo gi = new GameInfo(data,x,y,path,step);
                 oos.writeObject(gi);
                 oos.close();
@@ -497,10 +542,36 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
                 throw new RuntimeException(ex);
             }
 
+            //修改展示信息
+            //存档
+            item.setText("存档" + index + "(" + step + "步)");
+            //读档
+            loadJMenu.getItem(index).setText("存档" + index + "(" + step + "步)");
+
 
         }else if(obj == loadItem0 || obj == loadItem1 || obj == loadItem2 || obj == loadItem3 ||obj == loadItem4){
+            //读档
             JMenuItem item = (JMenuItem) obj;
-            System.out.println(item.getText());
+            String str = item.getText();
+            int index = str.charAt(2) - '0';
+            GameInfo gi = null;
+            try {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("puzzlegame\\lib\\save\\save" + index + ".data"));
+                gi = (GameInfo) ois.readObject();
+                ois.close();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            data = gi.getData();
+            x = gi.getX();
+            y = gi.getY();
+            path = gi.getPath();
+            step = gi.getStep();
+
+            initImage();
 
         }
     }
