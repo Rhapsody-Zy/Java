@@ -5,7 +5,7 @@ public class ThreadDemo {
 
         //守护线程
         //细节：当其他的非守护线程执行完毕之后，守护线程会陆续结束
-        //      当女神线程运行完后，备胎线程就没必要存在了
+        //      当女神线程运行完后，备胎线程就没必要存在了，守护线程会陆续结束
 
         MyThread1 t1 = new MyThread1();
         MyThread1 t2 = new MyThread1();
