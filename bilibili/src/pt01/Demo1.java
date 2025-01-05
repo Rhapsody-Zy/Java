@@ -15,7 +15,7 @@ public class Demo1 {
         System.out.println(i);
 
         //long
-        //如果需要定义long类型的变量，在数值的后面需要加一个L作为后缀，L可以是大写也可以是小写，但建议小写
+        //如果需要定义long类型的变量，在数值的后面需要加一个L作为后缀，L可以是大写也可以是小写，但建议大写
         long n = 99999999999L;
         System.out.println(n);
         //float
