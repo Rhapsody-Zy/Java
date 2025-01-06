@@ -24,7 +24,7 @@ public class BrandTest {
     public void testSearchAll() throws Exception {
         //加载配置文件
         Properties prop = new Properties();
-        prop.load(new FileInputStream("W:\\Java\\bilibili\\src\\druid.properties"));
+        prop.load(new FileInputStream("F:\\Java\\bilibili\\src\\druid.properties"));
 
         //获取连接池对象
         DataSource dataSource = DruidDataSourceFactory.createDataSource(prop);
@@ -73,7 +73,7 @@ public class BrandTest {
 
         //加载配置文件
         Properties prop = new Properties();
-        prop.load(new FileInputStream("W:\\Java\\bilibili\\src\\druid.properties"));
+        prop.load(new FileInputStream("F:\\Java\\bilibili\\src\\druid.properties"));
         //获取连接池对象
         DataSource dataSource = DruidDataSourceFactory.createDataSource(prop);
         //获取数据库连接
@@ -114,7 +114,7 @@ public class BrandTest {
 
         //加载配置文件
         Properties prop = new Properties();
-        prop.load(new FileInputStream("W:\\Java\\bilibili\\src\\druid.properties"));
+        prop.load(new FileInputStream("F:\\Java\\bilibili\\src\\druid.properties"));
         //获取连接池对象
         DataSource dataSource = DruidDataSourceFactory.createDataSource(prop);
         //获取数据库连接
@@ -150,7 +150,7 @@ public class BrandTest {
 
         //加载配置文件
         Properties prop = new Properties();
-        prop.load(new FileInputStream("W:\\Java\\bilibili\\src\\druid.properties"));
+        prop.load(new FileInputStream("F:\\Java\\bilibili\\src\\druid.properties"));
         //获取连接池对象
         DataSource dataSource = DruidDataSourceFactory.createDataSource(prop);
         //获取数据库连接

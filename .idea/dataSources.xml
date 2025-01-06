@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="MYSQL@localhost" uuid="3dd940d4-d033-4d65-ae93-38006f3980fd">
+    <data-source source="LOCAL" name="@localhost" uuid="f345caab-f0a2-4f16-9ca0-762fff44fb74">
       <driver-ref>mysql_aurora.aws_wrapper</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>software.amazon.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:aws-wrapper:mysql://localhost:3306/MYSQL?allowPublicKeyRetrieval=TRUE&amp;useSSL=FALSE</jdbc-url>
+      <jdbc-url>jdbc:aws-wrapper:mysql://localhost:3306</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
