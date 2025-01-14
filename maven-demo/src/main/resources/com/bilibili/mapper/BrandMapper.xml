@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bilibili.mapper.BrandMapper">
+
+    <!--sql 片段-->
+    <!--<sql id="brand_column">
+        id,brand_name as brandName, company_name as companyName, ordered, description, status
+    </sql>-->
+
+    <!--
+    数据库表的字段名称和实体类的属性名称不一样，则不能自动封装数据
+        *起别名：对不一样的列名起别名，让别名和实体类的属性名一样
+            *缺点：每次查询都要定义一次别名
+        *sq片段
+            *缺点：不灵活
+        *resultMap:
+            1.定义<resultMap>标签
+            2.在<select>标签中，使用resultMap属性替换resultType属性
+-->
+
+
+    <resultMap id="brandResultMap" type="com.bilibili.pojo.Brand">
+        <result column="brand_name" property="brandName" />
+        <result column="company_name" property="companyName" />
+    </resultMap>
+
+
+    <select id="selectAll" resultMap="brandResultMap">
+        select
+        *
+        from tb_brand;
+    </select>
+</mapper>

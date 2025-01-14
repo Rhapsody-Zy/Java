@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bilibili.mapper.BrandMapper">
+
+    <!--sql 片段-->
+    <!--<sql id="brand_column">
+        id,brand_name as brandName, company_name as companyName, ordered, description, status
+    </sql>-->
+
+    <resultMap id="brandResultMap" type="com.bilibili.pojo.Brand">
+        <result column="brand_name" property="brandName" />
+        <result column="company_name" property="companyName" />
+    </resultMap>
+
+
+    <select id="selectAll" resultMap="brandResultMap">
+        select
+        *
+        from tb_brand;
+    </select>
+</mapper>
