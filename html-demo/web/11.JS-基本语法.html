@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS-基本语法</title>
+
+</head>
+<body>
+
+</body>
+<script>
+  /*alert("hello")*/
+
+  //方式一 弹出警告框
+  //window.alert("hello");
+
+  //方式二 写入到html界面中
+  document.write("hello");
+
+  //方法三 控制台输出
+  console.log("hello");
+
+  //变量
+  var a = 10;
+  a = "张三";
+  alert(a);
+
+  //特点1：作用域大，全局变量
+  //特点2：可以重复定义
+
+  /*0、 空字符串、null、NAN、undefinded 为false，其他都为true*/
+
+/*  === 全等于号，即数据及数据类型都一致是才等于*/
+
+  /*函数的定义*/
+  function add1(a,b) {
+    return a+b;
+  }
+
+  /*函数的调用*/
+  var result = add1(2,3);
+  alert(result)
+
+  /*函数的定义二*/
+  var add2 = function (a, b){
+    return a + b;
+  }
+
+</script>
+
+</html>

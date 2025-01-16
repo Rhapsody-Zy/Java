@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>表单</title>
+  <style>
+
+  </style>
+
+</head>
+<body>
+
+  <form action="" method="post"></form>
+    姓名：<input type="text" name="username"> <br>
+    密码：<input type="password" name="password"> <br>
+    性别：<label><input type="radio" name="gender" value="1">男</label>
+         <label><input type="radio" name="gender" value="2">女</label><br>
+    爱好：<label><input type="checkbox" name="hobby" value="Java">Java</label>
+         <label><input type="checkbox" name="hobby" value="C++">C++</label>
+         <label><input type="checkbox" name="hobby" value="Python">Python</label><br>
+    图像：<input type="file" name="image"> <br>
+    生日：<input type="date" name="birthday"><br>
+    时间：<input type="time" name="time"><br>
+    日期时间：<input type="datetime-local" name="datetime"><br>
+    邮箱：<input type="email" name="email"><br>
+    年龄：<input type="number" name="age"><br>
+    学历：<select name="degree">
+            <option value="">---------请选择---------</option>
+            <option value="1">大专</option>
+            <option value="2">本科</option>
+            <option value="3">硕士</option>
+            <option value="4">博士</option>
+          </select><br>
+    描述：<textarea name="description" cols="30" rows="10"></textarea><br>
+    <input type="hidden" name="id" value="1">
+
+    <input type="submit" value="提交">
+    <input type="button" value="按钮">
+    <input type="reset" value="重置">
+</body>
+</html>
