@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS-BOM</title>
+
+</head>
+<body>
+
+</body>
+<script>
+
+  //confirm - 弹出一个担忧确认和取消的提示框
+  var flag = confirm("确定吗");
+  alert(flag);
+
+  //setInterval - 周期性的执行某一个函数
+  var i = 0;
+  setInterval(function () {
+    i++;
+    console.log("定时器执行了" + i + "次")
+  }, 2000)
+
+  //setTimeout - 延迟指定时间执行一次
+  setTimeout(function (){
+    alert("hello")
+  }, 3000);
+
+
+  //Location - 地址栏对象
+    //href - 设置或获取地址栏对象
+  alert(location.href);
+  location.href = "https://www.baidu.com";
+
+</script>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS-DOM案例</title>
+
+</head>
+<body>
+  <img id="img" src="img/01.png" width="40%"> <br>
+  <input type="button" id="btn1" value="图片1" onclick="C1()">
+  <input type="button" id="btn2" value="图片2" onclick="C2()">
+
+  <br>
+
+  <input type="text" id="name" value="itcast" onfocus="onFocus()" onblur="onBlur()">
+
+  <br>
+
+  <input type="checkbox" name="hobby"> 电影
+  <input type="checkbox" name="hobby"> 游戏
+  <input type="checkbox" name="hobby"> 跑步
+
+  <br>
+
+  <input type="button" value="全选" onclick="checkAll()">
+  <input type="button" value="全不选" onclick="reverse()">
+
+
+</body>
+<script>
+  function C1() {
+    var img = document.getElementById('img')
+    img.src = "img/01.png"
+  }
+  function C2() {
+    var img = document.getElementById('img')
+    img.src = "img/02.png"
+  }
+
+  function onFocus() {
+    var input = document.getElementById("name")
+    input.value = input.value.toUpperCase()
+  }
+
+  function onBlur() {
+    var input = document.getElementById("name")
+    input.value = input.value.toLowerCase()
+  }
+
+  function checkAll() {
+    var hobbys = document.getElementsByName("hobby")
+    for (let i = 0; i < hobbys.length; i++) {
+      const element = hobbys[i]
+      element.checked = true
+    }
+  }
+
+  function reverse(){
+    var hobbys = document.getElementsByName("hobby")
+    for (let i = 0; i < hobbys.length; i++) {
+      const element = hobbys[i]
+      element.checked = false
+    }
+  }
+
+</script>
+
+</html>

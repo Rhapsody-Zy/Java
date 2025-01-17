@@ -22,6 +22,44 @@
   }
 
   /*forEach：遍历有值的元素*/
+
+
+  var str = "hello";
+  console.log(str)
+
+  //获取指定位置字符
+  str.charAt(2)
+
+  //检索字符串位置
+  str.indexOf("lo")
+
+  //去除字符串左右两边空格
+  //str.trim
+
+  //窃取字符串
+  //str.substring()
+
+  //自定义对象
+  var user = {
+    name: "zy",
+    age: 22,
+    gender: "male",
+    eat() {
+      alert("用膳");
+    }
+  }
+
+  //定义JSON
+  var jsonStr = '{"name" : "Tom", "age" = 22, "addr" : ["苏州","上海"]}';
+
+  //json字符串 -->  js对象
+  var obj = JSON.parse(jsonStr)
+  alert(obj.name)
+
+  //js对象 -->  json字符串
+  alert(JSON.stringify(obj));
+
+
 </script>
 
 </html>

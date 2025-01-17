@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS-DOM案例</title>
+
+</head>
+<body>
+  <img id="h1" src="img/01.png" width="40%"> <br>
+
+  <div class="cls">LOL</div>
+  <div class="cls">英雄联盟</div>
+
+  <input type="checkbox" name="hobby"> 电影
+  <input type="checkbox" name="hobby"> 游戏
+  <input type="checkbox" name="hobby"> 跑步
+</body>
+<script>
+  //1.切换图片
+  var img = document.getElementById('h1');
+  img.src = "img/02.png"
+
+  //2.将所有div标签的内容后面加上 666
+  var divS = document.getElementsByTagName('div');
+  for (let i = 0; i < divS.length; i++) {
+    const div = divS[i];
+    div.innerHTML += "<font color=\"red\"> 666</font>";
+  }
+
+  var ins = document.getElementsByName('hobby');
+  for (let i = 0; i < ins.length; i++) {
+    const check = ins[i];
+    check.checked = true;
+  }
+
+</script>
+
+</html>

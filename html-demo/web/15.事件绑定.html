@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS-DOM案例</title>
+
+</head>
+<body>
+  <input type="button" id="btn1" value="事件1" onclick="on()">
+  <input type="button" id="btn2" value="事件2">
+</body>
+<script>
+  function on() {
+    alert("被点击了")
+  }
+
+  document.getElementById('btn2').onclick = function () {
+    alert("被点击了")
+  }
+
+  /*
+  onload() : 界面或元素被加载完成后触发
+
+  onclick() : 鼠标点击时触发
+
+  onblur() : 失去焦点时触发
+
+  onfocus() : 元素获得焦点时触发
+
+  onkeydown() : 某个键盘按下时
+
+  onmouseover() : 鼠标移动到元素之上
+
+  onmouseout() : 鼠标移出
+
+  onsubmit() : 表单提交
+   */
+</script>
+
+</html>
