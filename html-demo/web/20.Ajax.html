@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax</title>
+    <script src="js/vue.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+</head>
+<body>
+
+<input type="button" value="获取数据GET" onclick="get()">
+
+<input type="button" value="删除数据POST" onclick="post()">
+
+</body>
+<script>
+
+    function get() {
+        //通过axios发送异步请求-get
+        /*axios({
+            method: "get",
+            url: ""
+        }).then(result => {
+            console.log(result.data);
+        })*/
+
+        axios.get("").then(result => {
+            console.log(result.data);
+        })
+
+    }
+
+    function post() {
+        //通过axios发送异步请求-post
+        /*axios({
+            method: "post",
+            url: "",
+            data : "id=1"
+        }).then(result => {
+            console.log(result.data);
+        })*/
+
+        axios.post("","id=1").then(result => {
+            console.log(result.data);
+        })
+    }
+
+
+</script>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS-DOM案例</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+
+  <div id = "app">
+
+    <!--
+    v-bind 为HTML标签绑定属性值，如设置href，css样式等
+    v-model 在表单元素上创建双向数据绑定
+    -->
+
+    <!--<a v-bind:href="url">bilibili</a>-->
+    <a :href="url">bilibili</a>
+    <input type="text" v-model="url">
+
+    <!--<input type="button" value="按钮" v-on:click="handle">-->
+    <input type="button" value="按钮" @click="handle">
+
+    <br>
+    <!--if-else 判断和 show的区别的是：条件不符合的对象，if-else不渲染，而show都会渲染出来-->
+
+    年龄<input type="text" v-model="age">为
+    <span v-if="age <=35">年轻人</span>
+    <span v-else-if="age > 35 && age <60">青年人</span>
+    <span v-else>老年人</span>
+
+    <br>
+
+    年龄<input type="text" v-model="age">为
+    <span v-show="age <=35">年轻人</span>
+    <span v-show="age > 35 && age <60">青年人</span>
+    <span v-show="age >= 60">老年人</span>
+
+    <br>
+
+    <div v-for="(addr, index) in address">{{index}}{{addr}}</div>
+
+    <hr>
+
+    <div v-for="addr in address">{{addr}}</div>
+
+  </div>
+
+</body>
+<script>
+  new Vue({
+    el: "#app", //vue要接管的区域
+    data: {
+      url: "http://www.bilibili.com",
+      age: 20,
+      address: ["北京","上海","广州","苏州"]
+    },
+    methods:{
+      handle: function () {
+        alert("被点击了")
+      }
+    }
+  })
+
+</script>
+
+</html>
