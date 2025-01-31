@@ -9,6 +9,9 @@
         <option value="$PROJECT_DIR$/../Maven1/pom.xml" />
         <option value="$PROJECT_DIR$/Maven1/pom.xml" />
         <option value="$PROJECT_DIR$/maven-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot-web-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot-mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/web-management/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
